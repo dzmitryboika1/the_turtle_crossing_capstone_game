@@ -10,12 +10,12 @@ screen.title("The Turtle Crossing Capstone")
 screen.tracer(0)
 
 player = Player()
+scoreboard = Scoreboard()
+car_manager = CarManager()
 
 screen.listen()
 screen.onkey(player.up, key="w")
 screen.onkey(player.down, key="s")
-
-car_manager = CarManager()
 
 game_is_on = True
 while game_is_on:
@@ -27,7 +27,13 @@ while game_is_on:
     # detect collision
     for car in car_manager.all_cars:
         if player.distance(car) < 20:
+            scoreboard.game_over()
             game_is_on = False
 
+    # check if the player has reached the finish line
+    if player.is_at_finish_line():
+        player.go_to_start()
+        scoreboard.up_level()
+        car_manager.up_speed()
 
 screen.exitonclick()
