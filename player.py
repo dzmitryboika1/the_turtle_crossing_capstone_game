@@ -20,11 +20,3 @@ class Player(Turtle):
     def down(self):
         """move turtle down"""
         self.backward(MOVE_DISTANCE)
-
-
-
-
-
-
-
-
